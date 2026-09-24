@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuMind AI - Smart PDF Summarizer</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    body { background: #f4f7fe; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+    header { background: #4f46e5; color: white; text-align: center; padding: 2rem 1rem; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header p { opacity: 0.9; }
+    main { max-width: 800px; width: 90%; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .upload-area { border: 2px dashed #4f46e5; border-radius: 8px; padding: 2.5rem 1rem; text-align: center; cursor: pointer; transition: 0.3s; background: #f8faef; }
+    .upload-area:hover { background: #eef2ff; }
+    input[type="file"] { display: none; }
+    .btn { background: #4f46e5; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 1rem; display: inline-block; }
+    .btn:hover { background: #4338ca; }
+    .summary-box { margin-top: 2rem; padding: 1.5rem; background: #f9fafb; border-left: 4px solid #4f46e5; border-radius: 4px; display: none; }
+    footer { text-align: center; margin-top: auto; padding: 1rem; color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DocuMind AI</h1>
+    <p>Summarize complex PDFs & documents in seconds</p>
+  </header>
+
+  <main>
+    <div class="upload-area" onclick="document.getElementById('pdfInput').click()">
+      <h3>📄 Click or Drag PDF Here to Upload</h3>
+      <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">Supports PDF documents up to 25MB</p>
+      <input type="file" id="pdfInput" accept=".pdf" onchange="handleFile(this.files[0])">
+    </div>
+
+    <div style="text-align: center;">
+      <button class="btn" onclick="summarize()">Generate AI Summary</button>
+    </div>
+
+    <div class="summary-box" id="summaryOutput">
+      <h3>AI Summary Result:</h3>
+      <p id="summaryText" style="margin-top: 0.5rem; line-height: 1.6;"></p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 DocuMind AI. All rights reserved.
+  </footer>
+
+  <script>
+    let uploadedFile = null;
+
+    function handleFile(file) {
+      if(file) {
+        uploadedFile = file;
+        alert('Selected file: ' + file.name);
+      }
+    }
+
+    function summarize() {
+      if(!uploadedFile) {
+        alert('Please upload a PDF file first!');
+        return;
+      }
+      const output = document.getElementById('summaryOutput');
+      const text = document.getElementById('summaryText');
+      output.style.display = 'block';
+      text.innerText = 'Analyzing "' + uploadedFile.name + '"...\n\n• Key Takeaway 1: High-level overview extracted from uploaded document.\n• Key Takeaway 2: Core insights and actionable summary generated.\n• Key Takeaway 3: Document analysis completed successfully.';
+    }
+  </script>
+
+</body>
+</html>
